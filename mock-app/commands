@@ -1,0 +1,22 @@
+alias k='kubectl '
+
+# PODS
+alias gp='kubectl get pods'
+alias dp='kubectl delete pods '
+alias descp='kubectl describe pods '
+
+# DEPLOYMENTS
+alias gd='kubectl get deployments '
+alias dd='kubectl delete deployments '
+alias descd='kubectl describe deployments '
+alias scale='k scale deployments '
+
+# SERVICE
+alias gs='kubectl get svc '
+alias ds='kubectl delete svc '
+alias descs='kubectl describe svc '
+
+# NAMESPACE
+alias gn='kubectl get ns '
+alias dn='kubectl delete ns '
+alias descn='kubectl describe ns '

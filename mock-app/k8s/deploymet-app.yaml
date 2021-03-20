@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mock-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mock-containers
+  template:
+    metadata:
+      labels:
+        app: mock-containers
+    spec:
+      containers:
+        - name: mock-app
+          image: anupamgogoi/mock-app
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
