@@ -1,5 +1,5 @@
 public type Employee record {
-    string id;
+    int id?;
     string firstName;
     string lastName;
     string email;

@@ -3,7 +3,7 @@ import ballerina/http;
 import mock_api.records;
 import ballerina/io;
 
-records:Employee[] employees = [];
+records:Employee[] arrEmployee = [];
 int count = 0;
 
 service / on new http:Listener(9090) {
@@ -11,11 +11,13 @@ service / on new http:Listener(9090) {
     resource function get employee(http:Caller caller) {
         http:Response response = new;
 
-        json|error data = employees.cloneWithType(json);
-        if (data is json) {
-            io:println(data);
-            response.setJsonPayload(data);
+        json|error employees = arrEmployee.cloneWithType(json);
+        if (employees is json) {
+            io:println(employees);
+            response.setJsonPayload(employees);
         } else {
+            json e = {status: "Error occurred while getting employee."};
+            response.setJsonPayload(e);
             response.statusCode = 400;
         }
         var r = caller->respond(response);
@@ -27,10 +29,11 @@ service / on new http:Listener(9090) {
         if (payload is json) {
             records:Employee|error e = payload.cloneWithType(records:Employee);
             if (e is records:Employee) {
-                employees[count] = e;
+                e.id = count+1;
+                arrEmployee[count] = e;
                 json data = {
                     status: "Employee added.",
-                    id: count;
+                    id: e?.id
                 };
                 response.setJsonPayload(data);
                 response.statusCode = 201;
@@ -38,7 +41,7 @@ service / on new http:Listener(9090) {
             } else {
 
                 json data = {status: "Error occurred while adding employee."};
-                response.setJsonPayload("error");
+                response.setJsonPayload(data);
                 response.statusCode = 401;
             }
 
