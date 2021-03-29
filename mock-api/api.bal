@@ -1,4 +1,3 @@
-// import mock_api.records;
 import ballerina/http;
 import mock_api.records;
 import ballerina/io;
