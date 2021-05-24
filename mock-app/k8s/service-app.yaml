@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: mock-service
 spec:
- type: NodePort
+  type: NodePort
   selector:
     app:  mock-containers
   ports:
